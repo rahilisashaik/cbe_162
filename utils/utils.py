@@ -50,6 +50,15 @@ def solve_system(equations, variables):
     solutions = sp.solve(equations, variables, dict=True)
     return solutions
 
+def compute_pid_parameters(K, theta, tauc, tau):
+    """
+    Gives parameters of standard pid controllers given parameters below
+    params: gain (K), dead time (theta), controller (tauc), and time constant (tau)
+    """
+    Kc = tau/(K*(tauc + theta))
+    taui = tau
+    taud = (theta * tau) / (tau + theta)
+    return Kc, taui, taud
 
 def main():
     # example usage
